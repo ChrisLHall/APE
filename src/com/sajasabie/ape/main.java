@@ -51,8 +51,8 @@ public class main {
         frame.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
-               // System.out.println("BLAH");
-               //psthread.addObject(new PhySimObj(mouseEvent.getID(), mouseEvent.getX(), mouseEvent.getY(), -1e-6d, 0d, 8d, 16d, false));
+                // System.out.println("BLAH");
+                //psthread.addObject(new PhySimObj(mouseEvent.getID(), mouseEvent.getX(), mouseEvent.getY(), -1e-6d, 0d, 8d, 16d, false));
             }
 
             @Override
@@ -77,6 +77,20 @@ public class main {
             public void mouseDragged(MouseEvent mouseEvent) {
             }
         });
+        frame.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent keyEvent) {
+                System.out.println(keyEvent.getKeyCode());
+                if(keyEvent.getKeyCode() == 10) {
+
+                    psthread.start();
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent keyEvent) {
+            }
+        });
         frame.setBackground(Color.WHITE);
         renderer.setBackground(Color.WHITE);
         frame.setLocation(0, 0);
@@ -84,7 +98,6 @@ public class main {
         frame.setContentPane(renderer);
         frame.setVisible(true);
         rThread.start();
-        psthread.start();
         //while (true);
         //System.out.println("WASSSUUUP");
     }
