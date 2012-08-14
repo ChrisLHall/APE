@@ -8,6 +8,7 @@ public class PhySimThread extends Thread {
 	//distances are in meters, time is in seconds
 	//mass is in kilograms
 	public static final double GRAV_CONST = 6.6e-11d;
+	public static final double ELEC_SPRING_CONST = 6.6e-11d;
 	public boolean canrun;
 	public boolean inrun;
 	public boolean threadrunning;

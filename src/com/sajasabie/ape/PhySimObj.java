@@ -62,7 +62,7 @@ public class PhySimObj {
 		accely = 0;
 	}
 	
-	public boolean simulateWithObj(PhySimObj otherobject) {
+	public void simulateWithObj(PhySimObj otherobject) {
 		/** simulateWithObj(PhySimObj otherobject) :
 		 *  Calculates the effect of otherobject on this object, and adds them to the acceleration
 		 *  vectors for this time step. Handles collisions. Does not affect the other object.
@@ -74,10 +74,18 @@ public class PhySimObj {
 		double force = PhySimThread.GRAV_CONST * this.mass * otherobject.mass / (dist * dist);
 		accelx += force/mass*Math.cos(dir);
 		accely += force/mass*Math.sin(dir);
-		return true;
+		
+		//handle collisions
+		if (dist < (otherobject.radius + radius)) {
+			//calculate a new spring force
+			force = PhySimThread.ELEC_SPRING_CONST * (dist - (otherobject.radius + radius));
+			accelx += force/mass*Math.cos(dir);
+			accely += force/mass*Math.sin(dir);
+		}
 	}
 	
-	public boolean propagate(double steptime) {
+	
+	public void propagate(double steptime) {
 		vx += accelx*steptime;
 		vy += accely*steptime;
 		x += vx*steptime;
@@ -95,7 +103,5 @@ public class PhySimObj {
 		
 		if (myGObj != null)
 			myGObj.addPos(x, y, radius);
-		
-		return true;
 	}
 }
