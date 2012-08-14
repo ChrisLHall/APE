@@ -27,10 +27,10 @@ public class main {
         boolean blah = true;
         final GRAPEDrawThread rThread = new GRAPEDrawThread("BLAH",blah,renderer.rObject,renderer);
         //make the physim thread
-        psthread = new PhySimThread(10l);
-        psthread.addObject(new PhySimObj(100, 100d, 100d, 0d, 0d, 64d, 32d, false));
-       // psthread.addObject(new PhySimObj(101, 150d, 50d, -1e-6d, 0d, 8d, 16d, false));
-      //  psthread.addObject(new PhySimObj(102, 200d, 200d, -5e-6d, -5e-6d, 1d, 8d, false));
+        psthread = new PhySimThread(5l);
+        //psthread.addObject(new PhySimObj(100, 100d, 100d, 0d, 0d, 64d, 32d, true));
+       // psthread.addObject(new PhySimObj(101, 150d, 50d, -1e-6d, 0d, 8d, 16d, true));
+      //  psthread.addObject(new PhySimObj(102, 200d, 200d, -5e-6d, -5e-6d, 1d, 8d, true));
         // run it
         psthread.canrun = true;
         JFrame frame = new JFrame("GRAPE");
@@ -52,13 +52,13 @@ public class main {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
                 // System.out.println("BLAH");
-                //psthread.addObject(new PhySimObj(mouseEvent.getID(), mouseEvent.getX(), mouseEvent.getY(), -1e-6d, 0d, 8d, 16d, false));
+                //psthread.addObject(new PhySimObj(mouseEvent.getID(), mouseEvent.getX(), mouseEvent.getY(), -1e-6d, 0d, 8d, 16d, true));
             }
 
             @Override
             public void mousePressed(MouseEvent mouseEvent) {
                 System.out.println("BLAH");
-                psthread.addObject(new PhySimObj(mouseEvent.getID(), mouseEvent.getX(), mouseEvent.getY(), 0, 0d, 8d, 10d, false));
+                psthread.addObject(new PhySimObj(mouseEvent.getID(), mouseEvent.getX(), mouseEvent.getY(), 0d, 0d, 8d, 8d + Math.random()*4, true));
             }
 
             @Override

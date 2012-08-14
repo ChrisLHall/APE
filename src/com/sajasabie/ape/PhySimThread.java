@@ -8,7 +8,7 @@ public class PhySimThread extends Thread {
 	//distances are in meters, time is in seconds
 	//mass is in kilograms
 	public static final double GRAV_CONST = 6.6e-11d;
-	public static final double ELEC_SPRING_CONST = 6.6e-11d;
+	public static final double ELEC_SPRING_CONST = 3e-11d;
 	public boolean canrun;
 	public boolean inrun;
 	public boolean threadrunning;
@@ -18,7 +18,7 @@ public class PhySimThread extends Thread {
 	public long lasttime;
 	public long rundelay; //run delay in milliseconds
 	
-	public double steptime = 10000.0d; //physical step time in seconds
+	public double steptime = 12000.0d; //physical step time in seconds
 	
 	public PhySimThread(long delay) {
 		// TODO

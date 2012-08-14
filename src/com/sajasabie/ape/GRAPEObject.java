@@ -29,13 +29,14 @@ public class GRAPEObject {
 
         //rColor = Color.BLACK;
         ranCol();
-        rShape = new Ellipse2D.Double(x, y, 20, 20);
+        rShape = new Ellipse2D.Double(x-r, y-r, 2*r, 2*r);
     }
 
     public void reshape() {
         if(x.size() > 1) {
             x.remove(0);
             y.remove(0);
+            radius.remove(0);
             //System.out.println(x);
             rShape = new Ellipse2D.Double(x.get(0) - radius.get(0), y.get(0) - radius.get(0), radius.get(0)*2, radius.get(0)*2);
         }

@@ -76,7 +76,7 @@ public class PhySimObj {
 		accely += force/mass*Math.sin(dir);
 		
 		//handle collisions
-		if (dist < (otherobject.radius + radius)) {
+		if (cancollide && otherobject.cancollide && dist < (otherobject.radius + radius)) {
 			//calculate a new spring force
 			force = PhySimThread.ELEC_SPRING_CONST * (dist - (otherobject.radius + radius));
 			accelx += force/mass*Math.cos(dir);
