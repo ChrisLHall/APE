@@ -58,7 +58,7 @@ public class main {
             @Override
             public void mousePressed(MouseEvent mouseEvent) {
                 System.out.println("BLAH");
-                psthread.addObject(new PhySimObj(mouseEvent.getID(), mouseEvent.getX(), mouseEvent.getY(), -1e-6d, 0d, 8d, 16d, false));
+                psthread.addObject(new PhySimObj(mouseEvent.getID(), mouseEvent.getX(), mouseEvent.getY(), 0, 0d, 8d, 10d, false));
             }
 
             @Override

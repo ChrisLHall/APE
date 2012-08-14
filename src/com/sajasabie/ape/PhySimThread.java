@@ -35,8 +35,6 @@ public class PhySimThread extends Thread {
 			if(canrun && System.currentTimeMillis() >= (lasttime + rundelay)) {
 				inrun = true;
 				lasttime = System.currentTimeMillis();
-				System.out.print("Time: ");
-				System.out.println(lasttime);
 				
 				PhySimObj currentobj = null, otherobj = null;
 				
@@ -49,11 +47,6 @@ public class PhySimThread extends Thread {
 						otherobj = simobjects.get(j);
 						currentobj.simulateWithObj(otherobj);
 						otherobj.simulateWithObj(currentobj);
-						System.out.print("Simulation objects: ");
-						System.out.print(currentobj.ID);
-						System.out.print(" and ");
-						System.out.print(otherobj.ID);
-						System.out.println();
 					}
 				}
 				

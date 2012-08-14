@@ -91,16 +91,6 @@ public class PhySimObj {
 		x += vx*steptime;
 		y += vy*steptime;
 		
-		System.out.print("ID ");
-		System.out.print(ID);
-		System.out.print(" |X: ");
-		System.out.print(x);
-		System.out.print(" |Y: ");
-		System.out.print(y);
-		System.out.print(" |Radius: ");
-		System.out.print(radius);
-		System.out.println();
-		
 		if (myGObj != null)
 			myGObj.addPos(x, y, radius);
 	}
