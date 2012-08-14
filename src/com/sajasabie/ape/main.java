@@ -14,22 +14,37 @@ import java.util.LinkedList;
 public class main {
     public boolean RENDER = false;
     public static GRAPERender renderer;
+    public static PhySimThread psthread;
 
 
     public static void init() {
         renderer = new GRAPERender();
         renderer.rObject = new LinkedList<GRAPEObject>();
-        renderer.rObject.add(new GRAPEObject(3.0,3.0,3.0));
+        //renderer.rObject.add(new GRAPEObject(3.0,3.0,3.0));
     }
 
     public static void main(String[] args) {
         init();
         boolean blah = true;
         final GRAPEDrawThread rThread = new GRAPEDrawThread("BLAH",blah,renderer.rObject,renderer);
+        //make the physim thread
+        psthread = new PhySimThread(10l);
+        psthread.addObject(new PhySimObj(100, 100d, 100d, 0d, 0d, 64d, 32d, false));
+        psthread.addObject(new PhySimObj(101, 150d, 50d, -1e-6d, 0d, 8d, 16d, false));
+        psthread.addObject(new PhySimObj(102, 200d, 200d, -5e-6d, -5e-6d, 1d, 8d, false));
+        // run it
+        psthread.canrun = true;
         JFrame frame = new JFrame("GRAPE");
         frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 rThread.stop();
+                try {
+                	psthread.threadrunning = false;
+					psthread.join();
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
                 System.exit(0);
             }
         });
@@ -39,7 +54,8 @@ public class main {
         frame.setSize(620,620);
         frame.setContentPane(renderer);
         frame.setVisible(true);
-        rThread.run();
+        rThread.start();
+        psthread.start();
         //while (true);
         //System.out.println("WASSSUUUP");
     }

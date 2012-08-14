@@ -24,10 +24,10 @@ public class GRAPEDrawThread extends Thread {
     public void run() {
         while (true) {
 
-            if(System.currentTimeMillis() - lastTime > 1.0/FRAMERATE*1000 && RENDER) {
+            if(System.currentTimeMillis() - lastTime > 1.0/FRAMERATE*1000) {
             lastTime = System.currentTimeMillis();
             //rederer.rObject.get(0).x.add(rederer.rObject.get(0).x.get(0) + 0.1);
-            rederer.rObject.get(0).reshape();
+            //rederer.rObject.get(0).reshape();
             rederer.repaint();
             //System.out.println(rederer.rObject.get(0).x);
             }

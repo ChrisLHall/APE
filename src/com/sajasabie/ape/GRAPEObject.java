@@ -34,6 +34,7 @@ public class GRAPEObject {
     public void reshape() {
         if(x.size() > 1) {
             x.remove(0);
+            y.remove(0);
             //System.out.println(x);
             rShape = new Ellipse2D.Double(x.get(0), y.get(0), radius.get(0), radius.get(0));
         }

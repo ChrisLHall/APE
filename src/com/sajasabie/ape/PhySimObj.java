@@ -14,6 +14,8 @@ public class PhySimObj {
 	
 	public int ID;
 	
+	public GRAPEObject myGObj;
+	
 	public PhySimObj() {
 		this(IDManager.getNextID());
 	}
@@ -36,6 +38,17 @@ public class PhySimObj {
 		
 		radius = pRadius;
 		cancollide = pCanCollide;
+		
+		myGObj = new GRAPEObject(pX, pY, pRadius);
+		main.renderer.rObject.add(myGObj);
+	}
+	
+	public void setID(int id) {
+		ID = id;
+	}
+	
+	public void setGObj(GRAPEObject gobj) {
+		myGObj = gobj;
 	}
 	
 	public void timeStepReset() {
@@ -56,6 +69,33 @@ public class PhySimObj {
 		 *  
 		 *  Returns: whether the simulation was handled properly
 		 */
+		double dist = Utility.distance(this.x, this.y, otherobject.x, otherobject.y);
+		double dir = Utility.direction(this.x, this.y, otherobject.x, otherobject.y);
+		double force = PhySimThread.GRAV_CONST * this.mass * otherobject.mass / (dist * dist);
+		accelx += force/mass*Math.cos(dir);
+		accely += force/mass*Math.sin(dir);
+		return true;
+	}
+	
+	public boolean propagate(double steptime) {
+		vx += accelx*steptime;
+		vy += accely*steptime;
+		x += vx*steptime;
+		y += vy*steptime;
+		
+		System.out.print("ID ");
+		System.out.print(ID);
+		System.out.print(" |X: ");
+		System.out.print(x);
+		System.out.print(" |Y: ");
+		System.out.print(y);
+		System.out.print(" |Radius: ");
+		System.out.print(radius);
+		System.out.println();
+		
+		if (myGObj != null)
+			myGObj.addPos(x, y, radius);
+		
 		return true;
 	}
 }
