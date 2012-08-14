@@ -18,6 +18,7 @@ public class GRAPEObject {
     public List<Double> x;
     public List<Double> y;
     public List<Double> radius;
+    public double xx, yy, rr;
 
     public GRAPEObject(double x, double y, double r) {
         this.y = new ArrayList<Double>();
@@ -26,6 +27,9 @@ public class GRAPEObject {
         this.x.add(x);
         this.y.add(y);
         this.radius.add(r);
+        xx = x;
+        yy = y;
+        rr = r;
 
         //rColor = Color.BLACK;
         ranCol();
@@ -33,19 +37,23 @@ public class GRAPEObject {
     }
 
     public void reshape() {
-        if(x.size() > 1) {
+        /*if(x.size() > 1) {
             x.remove(0);
             y.remove(0);
             radius.remove(0);
             //System.out.println(x);
             rShape = new Ellipse2D.Double(x.get(0) - radius.get(0), y.get(0) - radius.get(0), radius.get(0)*2, radius.get(0)*2);
-        }
+        }*/
+    	rShape.setFrame(xx - rr, yy-rr, rr*2, rr*2);
     }
 
     public void addPos(double x,double y,double r) {
-        this.x.add(x);
+        /*this.x.add(x);
         this.y.add(y);
-        this.radius.add(r);
+        this.radius.add(r);*/
+    	xx = x;
+    	yy = y;
+    	rr = r;
         this.reshape();
     }
 

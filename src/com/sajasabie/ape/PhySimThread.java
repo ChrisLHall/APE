@@ -8,7 +8,7 @@ public class PhySimThread extends Thread {
 	//distances are in meters, time is in seconds
 	//mass is in kilograms
 	public static final double GRAV_CONST = 6.6e-11d;
-	public static final double ELEC_SPRING_CONST = 3e-11d;
+	public static final double ELEC_SPRING_CONST = 4e-11d;
 	public boolean canrun;
 	public boolean inrun;
 	public boolean threadrunning;
@@ -17,11 +17,13 @@ public class PhySimThread extends Thread {
 	
 	public long lasttime;
 	public long rundelay; //run delay in milliseconds
+	public double framerateactual;
 	
 	public double steptime = 12000.0d; //physical step time in seconds
 	
 	public PhySimThread(long delay) {
-		// TODO
+		framerateactual = 0d;
+
 		simobjects = new ArrayList<PhySimObj>();
 		canrun = false;
 		inrun = false;
@@ -33,6 +35,7 @@ public class PhySimThread extends Thread {
 	public void run() {
 		while(threadrunning) {
 			if(canrun && System.currentTimeMillis() >= (lasttime + rundelay)) {
+				framerateactual = 1000.0d/(System.currentTimeMillis() - lasttime);
 				inrun = true;
 				lasttime = System.currentTimeMillis();
 				

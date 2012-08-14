@@ -71,7 +71,7 @@ public class PhySimObj {
 		 */
 		double dist = Utility.distance(this.x, this.y, otherobject.x, otherobject.y);
 		double dir = Utility.direction(this.x, this.y, otherobject.x, otherobject.y);
-		double force = PhySimThread.GRAV_CONST * this.mass * otherobject.mass / (dist * dist);
+		double force = PhySimThread.GRAV_CONST * this.mass * otherobject.mass / (Math.max(dist, 2.0d) * Math.max(dist, 2.0d));
 		accelx += force/mass*Math.cos(dir);
 		accely += force/mass*Math.sin(dir);
 		
