@@ -27,7 +27,8 @@ public class GRAPEObject {
         this.y.add(y);
         this.radius.add(r);
 
-        rColor = Color.BLACK;
+        //rColor = Color.BLACK;
+        ranCol();
         rShape = new Ellipse2D.Double(x, y, 20, 20);
     }
 
@@ -36,7 +37,7 @@ public class GRAPEObject {
             x.remove(0);
             y.remove(0);
             //System.out.println(x);
-            rShape = new Ellipse2D.Double(x.get(0), y.get(0), radius.get(0), radius.get(0));
+            rShape = new Ellipse2D.Double(x.get(0) - radius.get(0), y.get(0) - radius.get(0), radius.get(0)*2, radius.get(0)*2);
         }
     }
 
@@ -45,5 +46,11 @@ public class GRAPEObject {
         this.y.add(y);
         this.radius.add(r);
         this.reshape();
+    }
+
+    public void ranCol() {
+        int color = (int)(Math.random() * 0x00FFFFFF);
+        color += 0xFF000000;
+        rColor = new Color(color);
     }
 }

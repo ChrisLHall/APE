@@ -2,8 +2,7 @@ package com.sajasabie.ape;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.util.LinkedList;
 
 /**
@@ -30,8 +29,8 @@ public class main {
         //make the physim thread
         psthread = new PhySimThread(10l);
         psthread.addObject(new PhySimObj(100, 100d, 100d, 0d, 0d, 64d, 32d, false));
-        psthread.addObject(new PhySimObj(101, 150d, 50d, -1e-6d, 0d, 8d, 16d, false));
-        psthread.addObject(new PhySimObj(102, 200d, 200d, -5e-6d, -5e-6d, 1d, 8d, false));
+       // psthread.addObject(new PhySimObj(101, 150d, 50d, -1e-6d, 0d, 8d, 16d, false));
+      //  psthread.addObject(new PhySimObj(102, 200d, 200d, -5e-6d, -5e-6d, 1d, 8d, false));
         // run it
         psthread.canrun = true;
         JFrame frame = new JFrame("GRAPE");
@@ -47,11 +46,41 @@ public class main {
 				}
                 System.exit(0);
             }
+
+        });
+        frame.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+               // System.out.println("BLAH");
+               //psthread.addObject(new PhySimObj(mouseEvent.getID(), mouseEvent.getX(), mouseEvent.getY(), -1e-6d, 0d, 8d, 16d, false));
+            }
+
+            @Override
+            public void mousePressed(MouseEvent mouseEvent) {
+                System.out.println("BLAH");
+                psthread.addObject(new PhySimObj(mouseEvent.getID(), mouseEvent.getX(), mouseEvent.getY(), -1e-6d, 0d, 8d, 16d, false));
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent mouseEvent) {
+            }
+
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent mouseWheelEvent) {
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent mouseEvent) {
+            }
+
+            @Override
+            public void mouseDragged(MouseEvent mouseEvent) {
+            }
         });
         frame.setBackground(Color.WHITE);
         renderer.setBackground(Color.WHITE);
         frame.setLocation(0, 0);
-        frame.setSize(620,620);
+        frame.setSize(900, 900);
         frame.setContentPane(renderer);
         frame.setVisible(true);
         rThread.start();

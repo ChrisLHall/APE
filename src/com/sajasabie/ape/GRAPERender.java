@@ -13,7 +13,7 @@ import java.util.List;
 public class GRAPERender extends JPanel {
     public List<GRAPEObject> rObject;
 
-    private final Rectangle2D.Double boundingrect = new Rectangle2D.Double(1,1,600,600);
+    private final Rectangle2D.Double boundingrect = new Rectangle2D.Double(1,1,899,899);
     public void paint(Graphics g) {
         //First, call the paint function to clar the screen
         super.paint(g);
@@ -21,7 +21,7 @@ public class GRAPERender extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         //render a bounding box
         g2d.setColor(Color.BLACK);
-        g2d.draw(boundingrect);
+        //g2d.draw(boundingrect);
 
         for(GRAPEObject tObj : rObject) {
             //tObj.reshape();
