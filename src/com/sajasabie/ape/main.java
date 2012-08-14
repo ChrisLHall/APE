@@ -83,7 +83,8 @@ public class main {
                 System.out.println(keyEvent.getKeyCode());
                 if(keyEvent.getKeyCode() == 10) {
 
-                    psthread.start();
+                    if(!psthread.isAlive()) psthread.start();
+                    //else psthread.suspend();
                 }
             }
 
