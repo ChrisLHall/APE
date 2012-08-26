@@ -19,7 +19,7 @@ public class PhySimThread extends Thread {
 	public long rundelay; //run delay in milliseconds
 	public double framerateactual;
 	
-	public double steptime = 12000.0d; //physical step time in seconds
+	public double steptime = 30000.0d; //physical step time in seconds
 	
 	public PhySimThread(long delay) {
 		framerateactual = 0d;
@@ -61,6 +61,16 @@ public class PhySimThread extends Thread {
 				}
 				
 				inrun = false;
+				
+				//see if I can free up some cycles
+				if(System.currentTimeMillis() - lasttime < rundelay) {
+	            	try {
+						PhySimThread.sleep(Math.max(1l, rundelay - (System.currentTimeMillis() - lasttime)));
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+	            }
 			}
 		}
 	}

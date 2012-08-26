@@ -10,6 +10,8 @@ public class PhySimObj {
 	public double mass;
 	public double radius;
 	
+	public final double FRICTION_FACTOR = 0.57;
+	
 	public boolean cancollide;
 	
 	public int ID;
@@ -79,8 +81,8 @@ public class PhySimObj {
 		if (cancollide && otherobject.cancollide && dist < (otherobject.radius + radius)) {
 			//calculate a new spring force
 			force = PhySimThread.ELEC_SPRING_CONST * (dist - (otherobject.radius + radius));
-			accelx += force/mass*Math.cos(dir);
-			accely += force/mass*Math.sin(dir);
+			accelx += FRICTION_FACTOR*force/mass*Math.cos(dir);
+			accely += FRICTION_FACTOR*force/mass*Math.sin(dir);
 		}
 	}
 	
@@ -92,6 +94,6 @@ public class PhySimObj {
 		y += vy*steptime;
 		
 		if (myGObj != null)
-			myGObj.addPos(x, y, radius);
+			myGObj.addPos(x, y, radius, vx, vy);
 	}
 }

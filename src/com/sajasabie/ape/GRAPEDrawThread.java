@@ -11,7 +11,7 @@ public class GRAPEDrawThread extends Thread {
     private boolean RENDER;
     private List<GRAPEObject> theObjects;
     private GRAPERender rederer;
-    public double FRAMERATE = 60.0;
+    public long delaymillis = (long)(1000/60);
     public double framerateactual;
     private long lastTime;
     
@@ -30,13 +30,22 @@ public class GRAPEDrawThread extends Thread {
 
     public void run() {
         while (threadrunning) {
-            if(System.currentTimeMillis() - lastTime > 1.0/FRAMERATE*1000) {
+            if(System.currentTimeMillis() - lastTime > delaymillis) {
             	framerateactual = 1000.0d/(System.currentTimeMillis() - lastTime);
 	            lastTime = System.currentTimeMillis();
 	            //rederer.rObject.get(0).x.add(rederer.rObject.get(0).x.get(0) + 0.1);
 	            //rederer.rObject.get(0).reshape();
 	            rederer.repaint();
 	            //System.out.println(rederer.rObject.get(0).x);
+	            // if there is still time left
+	            if(System.currentTimeMillis() - lastTime < delaymillis) {
+	            	try {
+						GRAPEDrawThread.sleep(Math.max(1l, delaymillis - (System.currentTimeMillis() - lastTime)));
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+	            }
             }
             //
         }

@@ -27,9 +27,8 @@ public class main {
         init();
         boolean blah = true;
         rThread = new GRAPEDrawThread("BLAH",blah,renderer.rObject,renderer);
-        rThread.threadrunning = true;
         //make the physim thread
-        psthread = new PhySimThread(2l);
+        psthread = new PhySimThread(10l);
         //psthread.addObject(new PhySimObj(100, 100d, 100d, 0d, 0d, 64d, 32d, true));
        // psthread.addObject(new PhySimObj(101, 150d, 50d, -1e-6d, 0d, 8d, 16d, true));
       //  psthread.addObject(new PhySimObj(102, 200d, 200d, -5e-6d, -5e-6d, 1d, 8d, true));
@@ -56,20 +55,20 @@ public class main {
             }
 
         });
-        frame.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent mouseEvent) {
+        renderer.addMouseListener(new MouseAdapter() {
+            //@Override
+            //public void mouseClicked(MouseEvent mouseEvent) {
                 // System.out.println("BLAH");
                 //psthread.addObject(new PhySimObj(mouseEvent.getID(), mouseEvent.getX(), mouseEvent.getY(), -1e-6d, 0d, 8d, 16d, true));
-            }
+            //}
 
             @Override
             public void mousePressed(MouseEvent mouseEvent) {
                 //System.out.println("BLAH");
-                psthread.addObject(new PhySimObj(mouseEvent.getID(), mouseEvent.getX(), mouseEvent.getY(), 0d, 0d, 8d, 8d + Math.random()*4, true));
+                psthread.addObject(new PhySimObj(IDManager.getNextID(), mouseEvent.getX(), mouseEvent.getY(), 0d, 0d, 8d, 8d + Math.random()*4, true));
             }
 
-            @Override
+            /*@Override
             public void mouseReleased(MouseEvent mouseEvent) {
             }
 
@@ -83,7 +82,7 @@ public class main {
 
             @Override
             public void mouseDragged(MouseEvent mouseEvent) {
-            }
+            }*/
         });
         frame.addKeyListener(new KeyAdapter() {
             @Override
@@ -91,8 +90,12 @@ public class main {
                 System.out.println(keyEvent.getKeyCode());
                 if(keyEvent.getKeyCode() == 10) {
 
-                    if(!psthread.isAlive()) psthread.start();
-                    //else psthread.suspend();
+                    if(!psthread.isAlive()) {
+                    	psthread.start();
+                    	psthread.canrun = true;
+                    } else {
+                    	psthread.canrun = !psthread.canrun;
+                    }
                 }
             }
 
@@ -103,9 +106,10 @@ public class main {
         frame.setBackground(Color.WHITE);
         renderer.setBackground(Color.WHITE);
         frame.setLocation(0, 0);
-        frame.setSize(900, 900);
+        frame.setSize(1024, 600);
         frame.setContentPane(renderer);
         frame.setVisible(true);
+        rThread.threadrunning = true;
         rThread.start();
         //while (true);
         //System.out.println("WASSSUUUP");

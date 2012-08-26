@@ -39,6 +39,10 @@ public class GRAPERender extends JPanel {
             //tObj.reshape();
             g2d.setColor(tObj.rColor);
             g2d.fill(tObj.rShape);
+            g2d.setColor(tObj.rLineColor);
+            //g2d.drawLine((int)tObj.rVeloLine.x1, (int)tObj.rVeloLine.y1, (int)tObj.rVeloLine.x2, (int)tObj.rVeloLine.y2);
+            g2d.draw(tObj.rVeloLine);
+            //g2d.fill(tObj.rVeloLine);
         }
         //render all of the JIRenderables currently attached to the screen
 
